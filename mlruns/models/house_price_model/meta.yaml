@@ -1,0 +1,11 @@
+aliases:
+  staging: '1'
+creation_timestamp: 1763861504740
+description: "Model for predicting house prices.\nAlgorithm: RandomForest\nHyperparameters:
+  {'n_estimators': 200, 'max_depth': 15, 'min_samples_split': 5, 'min_samples_leaf':
+  2, 'random_state': 42}\nFeatures used: All features in the dataset except the target
+  variable\nTarget variable: price\nTrained on dataset: data/processed/featured_house_data.csv\nModel
+  saved at: models/trained/house_price_model.pkl\nPerformance metrics:\n  - MAE: 12964.66\n
+  \ - R²: 0.9884"
+last_updated_timestamp: 1763861505029
+name: house_price_model
