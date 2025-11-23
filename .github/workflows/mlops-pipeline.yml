@@ -49,7 +49,7 @@ jobs:
             data/processed/featured_house_data.csv
             models/trained/preprocessor.pkl
 
-  model-training:
+model-training:
     name: Model Training
     needs: feature-engineering
     runs-on: ubuntu-latest
@@ -59,20 +59,20 @@ jobs:
         with:
           python-version: "3.11.9"
       - run: pip install -r requirements.txt
+      
+      # Creamos carpetas base (por seguridad)
       - run: mkdir -p data/processed models/trained configs
       
-      # Descargar artefactos del paso anterior
+      # CORRECCIÓN: Descargamos en la raíz (path: .) para que restaure la estructura original
       - uses: actions/download-artifact@v4
         with:
           name: featured-data
-          path: ./artifacts
+          path: .
       
-      # Mover los artefactos a sus carpetas correctas
-      - run: |
-          mv artifacts/featured_house_data.csv data/processed/
-          mv artifacts/preprocessor.pkl models/trained/
+      # Verificamos dónde quedaron los archivos (opcional, para debug)
+      - run: ls -R
       
-      # Entrenar el modelo (Sin MLflow URI para evitar errores de conexión en GitHub)
+      # Entrenar el modelo (ya no hace falta mover nada)
       - run: |
           python src/models/train_model.py --config configs/model_config.yaml --data data/processed/featured_house_data.csv --models-dir models
       

@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/Milton/Desktop/Devops/mlops/mlops-lab/mlruns/0/5ae2fdc414c5402ab497466e8d4950ca/artifacts
+end_time: 1763861877886
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 5ae2fdc414c5402ab497466e8d4950ca
+run_name: final_training
+run_uuid: 5ae2fdc414c5402ab497466e8d4950ca
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1763861872750
+status: 4
+tags: []
+user_id: Milton
