@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Servicio 1: Tu API (Backend)
   api:

@@ -1,8 +1,29 @@
-version: '3'
 services:
-  mlflow:
-    image: ghcr.io/mlflow/mlflow:latest
+  api:
+    image: santiagouribe269/lab4_c-api:latest
     ports:
-      - "5555:5000"
-    command: mlflow server --host 0.0.0.0 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /tmp/mlruns
-    container_name: mlflow-tracking-server
+      - "8000:8000"
+
+  streamlit:
+    image: santiagouribe269/lab4_c-streamlit:latest
+    container_name: mlops-streamlit-deploy
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://api:8000
+    depends_on:
+      - api
+
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana:10.2.2
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus

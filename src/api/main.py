@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from prometheus_fastapi_instrumentator import Instrumentator  # agregar este import
 from .inference import predict_price, batch_predict
 from .schemas import HousePredictionRequest, PredictionResponse
 
@@ -8,7 +9,7 @@ app = FastAPI(
     title="House Price Prediction API",
     description=(
         "An API for predicting house prices based on various features. "
-        "This application is part of the MLOps. "
+        "This application is part of the MLOps Bootcamp by School of Devops. "
         "Authored by Gourav Shah."
     ),
     version="1.0.0",
@@ -23,6 +24,8 @@ app = FastAPI(
     },
 )
 
+# Agregar esta configuración de Prometheus
+Instrumentator().instrument(app).expose(app)
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -35,7 +38,7 @@ app.add_middleware(
 # Health check endpoint
 @app.get("/health", response_model=dict)
 async def health_check():
-    return {"status": "healthy", "model_loaded": True}
+    return {"status": "healthy"}
 
 # Prediction endpoint
 @app.post("/predict", response_model=PredictionResponse)
